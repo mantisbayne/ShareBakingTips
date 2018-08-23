@@ -18,6 +18,9 @@ buildscript {
         exoplayerVersion = '2.8.2'
         butterknifeVersion = '8.8.1'
         timberVersion = '4.7.1'
+        rxJava2Version = '2.2.0'
+        rxAndroidVersion = '2.1.0'
+        rxJavaAdapterVersion = '2.3.0'
     }
     repositories {
         google()
