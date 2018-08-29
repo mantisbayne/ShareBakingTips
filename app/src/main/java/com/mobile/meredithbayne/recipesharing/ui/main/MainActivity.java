@@ -12,7 +12,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainInterface {
-    private MainPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
         ButterKnife.bind(this);
 
         if (savedInstanceState != null) {
-            presenter = new MainPresenter(this);
+            MainPresenter presenter = new MainPresenter(this);
             presenter.getRecipes();
         }
     }
