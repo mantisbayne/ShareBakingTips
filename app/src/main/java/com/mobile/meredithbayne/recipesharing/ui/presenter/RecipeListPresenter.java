@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class RecipeListPresenter implements RecipeListPresenterInterface {
+public class RecipeListPresenter {
     private static final String TAG = RecipeListPresenter.class.getSimpleName();
 
     private RecipeListInterface mainInterface;
@@ -59,7 +59,6 @@ public class RecipeListPresenter implements RecipeListPresenterInterface {
         };
     }
 
-    @Override
     public void getRecipes() {
         getRecipesObservable().subscribeWith(getRecipesObserver());
     }
