@@ -1,4 +1,4 @@
-package com.mobile.meredithbayne.recipesharing.ui.main;
+package com.mobile.meredithbayne.recipesharing.ui.presenter;
 
 import com.mobile.meredithbayne.recipesharing.api.RecipeService;
 import com.mobile.meredithbayne.recipesharing.api.RecipesClient;
@@ -13,13 +13,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class MainPresenter implements MainPresenterInterface {
-    private static final String TAG = MainPresenter.class.getSimpleName();
+public class RecipeListPresenter implements RecipeListPresenterInterface {
+    private static final String TAG = RecipeListPresenter.class.getSimpleName();
 
-    private MainInterface mainInterface;
+    private RecipeListInterface mainInterface;
     private Disposable disposable;
 
-    public MainPresenter(MainInterface mainInterface) {
+    public RecipeListPresenter(RecipeListInterface mainInterface) {
         this.mainInterface = mainInterface;
     }
 

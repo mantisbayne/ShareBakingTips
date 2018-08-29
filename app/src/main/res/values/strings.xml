@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">RecipeSharing</string>
-    <string name="no_recipes_found">No recipes found, please try again</string>
+    <string name="no_recipes_found">Could not load, please check connection and try again</string>
     <string name="recipe_image_accessibility">Recipe Image</string>
 </resources>

@@ -29,11 +29,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         void onRecipeClick(int position);
     }
 
-    public RecipeListAdapter(Context mContext, List<Recipe> mRecipeList,
-                             RecipeClickListener listener) {
+    public RecipeListAdapter(Context mContext, List<Recipe> mRecipeList) {
         this.mContext = mContext;
         this.mRecipeList = mRecipeList;
-        this.listener = listener;
     }
 
     @NonNull
