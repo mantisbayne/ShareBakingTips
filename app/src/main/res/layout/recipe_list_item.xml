@@ -26,9 +26,10 @@
 
         <TextView
             android:id="@+id/recipe_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/medium_margin"
             android:textSize="@dimen/large_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +44,6 @@
             android:text="@string/serves"
             android:textSize="@dimen/medium_text"
             app:layout_constraintEnd_toEndOf="@+id/recipe_name"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/recipe_name"
             app:layout_constraintTop_toBottomOf="@+id/recipe_name" />
 
@@ -56,5 +56,17 @@
             app:layout_constraintStart_toEndOf="@+id/servings_header"
             app:layout_constraintTop_toBottomOf="@+id/recipe_name"
             tools:text="8" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="@+id/servings_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recipe_name"
+            app:layout_constraintTop_toTopOf="@+id/recipe_name" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

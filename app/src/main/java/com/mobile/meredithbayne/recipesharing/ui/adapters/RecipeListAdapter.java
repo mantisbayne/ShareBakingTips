@@ -13,8 +13,6 @@ import com.mobile.meredithbayne.recipesharing.R;
 import com.mobile.meredithbayne.recipesharing.model.Recipe;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,9 +28,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         void onRecipeClick(int position);
     }
 
-    public RecipeListAdapter(Context mContext, List<Recipe> mRecipeList) {
+    public RecipeListAdapter(Context mContext, List<Recipe> mRecipeList, RecipeClickListener listener) {
         this.mContext = mContext;
         this.mRecipeList = mRecipeList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -58,6 +57,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                     .error(R.drawable.ic_error_outline_black)
                     .into(holder.mRecipeImage);
         }
+    }
+
+    public Recipe getRecipeItem(int id) {
+        return mRecipeList == null ? null : mRecipeList.get(id);
     }
 
     @Override
