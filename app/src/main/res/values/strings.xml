@@ -2,4 +2,6 @@
     <string name="app_name">RecipeSharing</string>
     <string name="no_recipes_found">Could not load, please check connection and try again</string>
     <string name="recipe_image_accessibility">Recipe Image</string>
+    <string name="servings">Serves</string>
+    <string name="serves">Serves</string>
 </resources>

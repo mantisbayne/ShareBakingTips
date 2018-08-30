@@ -48,6 +48,7 @@ public class RecipeListFragment extends Fragment implements RecipeListInterface,
         ButterKnife.bind(this, root);
 
         mRecipeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecipeList.setHasFixedSize(true);
 
         presenter = new RecipeListPresenter(this);
         presenter.getRecipes();

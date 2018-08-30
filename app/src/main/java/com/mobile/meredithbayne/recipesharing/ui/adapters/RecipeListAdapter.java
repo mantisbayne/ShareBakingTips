@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.mobile.meredithbayne.recipesharing.R;
 import com.mobile.meredithbayne.recipesharing.model.Recipe;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -45,16 +46,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         holder.mRecipeName.setText(mRecipeList.get(position).getName());
+        holder.mServings.setText(String.valueOf(mRecipeList.get(position).getServings()));
 
         String imagePath = mRecipeList.get(position).getImage();
-        if (!imagePath.isEmpty()) {
-            Glide.with(mContext)
-                    .load(imagePath)
-                    .apply(new RequestOptions()
-                            .placeholder(R.drawable.ic_recipe_placeholder)
-                            .centerCrop()
-                            .dontAnimate()
-                            .dontTransform())
+        Picasso.Builder builder = new Picasso.Builder(mContext);
+        if (imagePath.isEmpty()) {
+            holder.mRecipeImage.setImageResource(R.drawable.ic_recipe_placeholder);
+        } else {
+            builder.build().load(imagePath)
+                    .noFade()
+                    .error(R.drawable.ic_error_outline_black)
                     .into(holder.mRecipeImage);
         }
     }
@@ -70,6 +71,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         @BindView(R.id.recipe_image)
         AppCompatImageView mRecipeImage;
+
+        @BindView(R.id.servings)
+        TextView mServings;
 
         RecipeViewHolder(View itemView) {
             super(itemView);
