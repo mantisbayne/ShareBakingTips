@@ -6,4 +6,5 @@
     <dimen name="large_text">24sp</dimen>
     <dimen name="medium_text">16sp</dimen>
     <dimen name="recipe_image_size">56dp</dimen>
+    <dimen name="step_order_width">36dp</dimen>
 </resources>

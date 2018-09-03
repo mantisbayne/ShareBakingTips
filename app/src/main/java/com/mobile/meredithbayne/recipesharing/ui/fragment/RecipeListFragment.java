@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.mobile.meredithbayne.recipesharing.R;
 import com.mobile.meredithbayne.recipesharing.model.Recipe;
-import com.mobile.meredithbayne.recipesharing.ui.activity.RecipeDetailActivity;
+import com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepActivity;
 import com.mobile.meredithbayne.recipesharing.ui.adapters.RecipeListAdapter;
 import com.mobile.meredithbayne.recipesharing.ui.presenter.RecipeListInterface;
 import com.mobile.meredithbayne.recipesharing.ui.presenter.RecipeListPresenter;
@@ -83,7 +83,7 @@ public class RecipeListFragment extends Fragment implements RecipeListInterface 
 
     private void handleRecipeClick(int position) {
         recipe = adapter.getRecipeItem(position);
-        Intent intent = new Intent(getActivity(), RecipeDetailActivity.class);
+        Intent intent = new Intent(getActivity(), RecipeStepActivity.class);
         intent.putExtra(EXTRA_RECIPE, recipe);
         startActivity(intent);
     }

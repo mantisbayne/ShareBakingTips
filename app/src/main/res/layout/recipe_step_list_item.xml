@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/recipe_step_order"
+        android:layout_width="@dimen/step_order_width"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="@color/primaryColor"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/recipe_step_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintBottom_toBottomOf="@+id/recipe_step_order"
+        app:layout_constraintEnd_toStartOf="@+id/recipe_step_open_arrow"
+        app:layout_constraintStart_toEndOf="@+id/recipe_step_order"
+        app:layout_constraintTop_toTopOf="@+id/recipe_step_order"
+        tools:text="Recipe Introduction" />
+
+    <ImageView
+        android:id="@+id/recipe_step_open_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/recipe_step_order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recipe_step_order"
+        app:srcCompat="@drawable/ic_chevron_right"
+        tools:ignore="ContentDescription" />
+
+</android.support.constraint.ConstraintLayout>
