@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/ingredients_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        app:cardBackgroundColor="@color/primaryColor"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ingredients_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="79dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/medium_text"
+            tools:text="vanilla, divided (4 TSP)" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/ingredients_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:background="@color/secondaryColor"
+        android:paddingStart="@dimen/extra_large_padding"
+        android:paddingTop="@dimen/small_padding"
+        android:paddingEnd="@dimen/large_margin"
+        android:paddingBottom="@dimen/medium_margin"
+        android:text="@string/ingredients"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

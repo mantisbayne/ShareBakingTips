@@ -3,10 +3,12 @@ package com.mobile.meredithbayne.recipesharing.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.mobile.meredithbayne.recipesharing.R;
 import com.mobile.meredithbayne.recipesharing.model.Recipe;
+import com.mobile.meredithbayne.recipesharing.ui.adapters.RecipeStepAdapter;
 import com.mobile.meredithbayne.recipesharing.ui.fragment.RecipeListFragment;
 
 import butterknife.BindView;
@@ -14,7 +16,10 @@ import butterknife.ButterKnife;
 
 public class RecipeStepActivity extends AppCompatActivity {
     @BindView(R.id.recipe_step_list)
-    RecyclerView mRecyclerView;
+    RecyclerView mStepList;
+
+    RecipeStepAdapter adapter;
+    Recipe mRecipe;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,12 +30,20 @@ public class RecipeStepActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            Recipe mRecipe = bundle.getParcelable(RecipeListFragment.EXTRA_RECIPE);
+            mRecipe = bundle.getParcelable(RecipeListFragment.EXTRA_RECIPE);
             if (mRecipe != null) {
                 setTitle(mRecipe.getName());
             }
-        }
 
+            mStepList.setLayoutManager(new LinearLayoutManager(this));
+            mStepList.setHasFixedSize(true);
+
+            adapter = new RecipeStepAdapter(mRecipe, this::handleStepClick);
+            mStepList.setAdapter(adapter);
+        }
+    }
+
+    private void handleStepClick(int position) {
 
     }
 }

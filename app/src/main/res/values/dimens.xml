@@ -7,4 +7,7 @@
     <dimen name="medium_text">16sp</dimen>
     <dimen name="recipe_image_size">56dp</dimen>
     <dimen name="step_order_width">36dp</dimen>
+    <dimen name="extra_large_padding">36dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="card_radius">4dp</dimen>
 </resources>

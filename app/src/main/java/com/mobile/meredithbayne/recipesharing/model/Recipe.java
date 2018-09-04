@@ -4,6 +4,7 @@ package com.mobile.meredithbayne.recipesharing.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -17,10 +18,10 @@ public class Recipe implements Parcelable {
     private String name;
     @SerializedName("ingredients")
     @Expose
-    private List<Ingredient> ingredients = null;
+    private List<Ingredient> ingredients;
     @SerializedName("steps")
     @Expose
-    private List<Step> steps = null;
+    private List<Step> steps;
     @SerializedName("servings")
     @Expose
     private Integer servings;
@@ -28,19 +29,15 @@ public class Recipe implements Parcelable {
     @Expose
     private String image;
 
-    private Recipe(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readInt();
-        }
-        name = in.readString();
-        if (in.readByte() == 0) {
-            servings = null;
-        } else {
-            servings = in.readInt();
-        }
-        image = in.readString();
+    protected Recipe(Parcel in) {
+        this.image = in.readString();
+        this.servings = in.readInt();
+        this.name = in.readString();
+        this.ingredients = new ArrayList<>();
+        in.readList(this.ingredients, Ingredient.class.getClassLoader());
+        this.id = in.readInt();
+        this.steps = new ArrayList<>();
+        in.readList(this.steps, Step.class.getClassLoader());
     }
 
     public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
@@ -83,10 +80,6 @@ public class Recipe implements Parcelable {
         return steps;
     }
 
-    public void setSteps(List<Step> steps) {
-        this.steps = steps;
-    }
-
     public Integer getServings() {
         return servings;
     }
@@ -110,19 +103,11 @@ public class Recipe implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (id == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(id);
-        }
-        dest.writeString(name);
-        if (servings == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(servings);
-        }
-        dest.writeString(image);
+        dest.writeString(this.image);
+        dest.writeInt(this.servings);
+        dest.writeString(this.name);
+        dest.writeList(this.ingredients);
+        dest.writeInt(this.id);
+        dest.writeList(this.steps);
     }
 }
