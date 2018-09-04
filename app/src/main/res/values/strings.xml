@@ -7,4 +7,5 @@
     <string name="serves">Serves</string>
     <string name="open_recipe_accessibility">Open recipe</string>
     <string name="ingredients">Ingredients</string>
+    <string name="step_details_title">Step details</string>
 </resources>

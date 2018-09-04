@@ -1,5 +1,6 @@
 package com.mobile.meredithbayne.recipesharing.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import com.mobile.meredithbayne.recipesharing.ui.fragment.RecipeListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.mobile.meredithbayne.recipesharing.ui.fragment.RecipeListFragment.EXTRA_RECIPE;
 
 public class RecipeStepActivity extends AppCompatActivity {
     @BindView(R.id.recipe_step_list)
@@ -30,7 +33,7 @@ public class RecipeStepActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            mRecipe = bundle.getParcelable(RecipeListFragment.EXTRA_RECIPE);
+            mRecipe = bundle.getParcelable(EXTRA_RECIPE);
             if (mRecipe != null) {
                 setTitle(mRecipe.getName());
             }
@@ -44,6 +47,8 @@ public class RecipeStepActivity extends AppCompatActivity {
     }
 
     private void handleStepClick(int position) {
-
+        Intent intent = new Intent(this, RecipeStepDetailActivity.class);
+        intent.putExtra(EXTRA_RECIPE, mRecipe);
+        startActivity(intent);
     }
 }

@@ -17,6 +17,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_step_detail_activity);
+        setTitle(R.string.step_details_title);
 
         ButterKnife.bind(this);
     }
