@@ -8,4 +8,6 @@
     <string name="open_recipe_accessibility">Open recipe</string>
     <string name="ingredients">Ingredients</string>
     <string name="step_details_title">Step details</string>
+    <string name="button_next_step_accessibility">Button next step</string>
+    <string name="next_step">Next step</string>
 </resources>
