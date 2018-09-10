@@ -10,4 +10,5 @@
     <dimen name="extra_large_padding">36dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="card_radius">4dp</dimen>
+    <dimen name="medium_padding">16dp</dimen>
 </resources>
