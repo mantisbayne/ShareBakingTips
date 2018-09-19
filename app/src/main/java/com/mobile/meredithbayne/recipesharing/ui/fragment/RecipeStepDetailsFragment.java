@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -22,10 +23,13 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.mobile.meredithbayne.recipesharing.R;
+import com.mobile.meredithbayne.recipesharing.model.Recipe;
 import com.mobile.meredithbayne.recipesharing.model.Step;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
+import static com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepActivity.EXTRA_RECIPE;
 import static com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepActivity.EXTRA_STEP;
 
 public class RecipeStepDetailsFragment extends Fragment {
@@ -35,11 +39,18 @@ public class RecipeStepDetailsFragment extends Fragment {
     @BindView(R.id.step_description)
     TextView mStepDescription;
 
+    @BindView(R.id.next_step_header)
+    TextView mNextStepHeader;
+
+    @BindView(R.id.recipe_open_arrow)
+    ImageView mNextStepArrow;
+
     private SimpleExoPlayer mPlayerView;
     private long mPlaybackPosition = 0;
     private boolean mPlayWhenReady = true;
 
     private Step mStep;
+    private Recipe mRecipe;
 
     public RecipeStepDetailsFragment() {
 
@@ -53,6 +64,7 @@ public class RecipeStepDetailsFragment extends Fragment {
 
         if (args != null) {
             mStep = args.getParcelable(EXTRA_STEP);
+            mRecipe = args.getParcelable(EXTRA_RECIPE);
         }
     }
 
@@ -60,11 +72,22 @@ public class RecipeStepDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recipe_step_detail, container, false);
+        View root = inflater.inflate(R.layout.recipe_step_detail, container, false);
+
+        ButterKnife.bind(this, root);
 
         mStepDescription.setText(mStep.getDescription());
 
-        return view;
+        showOrHideNextStepView();
+
+        return root;
+    }
+
+    private void showOrHideNextStepView() {
+        if (mRecipe.getSteps().size() > 1) {
+            mNextStepHeader.setVisibility(View.VISIBLE);
+            mNextStepArrow.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

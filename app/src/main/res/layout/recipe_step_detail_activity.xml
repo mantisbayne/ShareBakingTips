@@ -4,11 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recipe_step_list"
+    <FrameLayout
+        android:id="@+id/recipe_step_detail_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/medium_margin"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

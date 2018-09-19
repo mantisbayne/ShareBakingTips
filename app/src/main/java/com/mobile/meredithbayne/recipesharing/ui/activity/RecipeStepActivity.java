@@ -15,10 +15,9 @@ import com.mobile.meredithbayne.recipesharing.ui.fragment.RecipeStepDetailsFragm
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mobile.meredithbayne.recipesharing.ui.fragment.RecipeListFragment.EXTRA_RECIPE;
-
 public class RecipeStepActivity extends AppCompatActivity {
     public static final String EXTRA_STEP = "step";
+    public static final String EXTRA_RECIPE = "recipe";
 
     @BindView(R.id.recipe_step_list)
     RecyclerView mStepList;
@@ -69,6 +68,7 @@ public class RecipeStepActivity extends AppCompatActivity {
     private void handleStepClick(int position) {
         Intent intent = new Intent(this, RecipeStepDetailActivity.class);
         intent.putExtra(EXTRA_RECIPE, mRecipe);
+        intent.putExtra(EXTRA_STEP, mRecipe.getSteps().get(position));
         startActivity(intent);
     }
 }
