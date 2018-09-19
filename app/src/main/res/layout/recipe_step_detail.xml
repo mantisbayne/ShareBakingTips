@@ -8,7 +8,7 @@
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/step_video"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/medium_margin"
         android:layout_marginStart="@dimen/medium_margin">
