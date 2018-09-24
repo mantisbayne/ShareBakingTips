@@ -52,30 +52,29 @@ public class RecipeStepActivity extends AppCompatActivity {
 
             adapter = new RecipeStepAdapter(mRecipe, this::handleStepClick);
             mStepList.setAdapter(adapter);
-        }
 
-        if (isTablet && !isStepsEmpty(mRecipe)) {
-            if (savedInstanceState != null) {
-                selectedStep = savedInstanceState.getParcelable(STATE_SELECTED_STEP);
+            if (isTablet) {
+                if (savedInstanceState != null)
+                    selectedStep = savedInstanceState.getParcelable(STATE_SELECTED_STEP);
+                else
+                    selectedStep = mRecipe.getSteps().get(0);
                 showStepDetailsFragment(selectedStep);
             }
         }
     }
 
     private void showStepDetailsFragment(Step selectedStep) {
-        RecipeStepDetailsFragment fragment = new RecipeStepDetailsFragment();
-        Bundle arguments = new Bundle();
-        arguments.putParcelable(STATE_SELECTED_STEP, selectedStep);
-        fragment.setArguments(arguments);
+        Bundle args = new Bundle();
+        args.putParcelable(EXTRA_RECIPE, mRecipe);
+        args.putParcelable(EXTRA_STEP, selectedStep);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
+        RecipeStepDetailsFragment fragment = new RecipeStepDetailsFragment();
+        fragment.setArguments(args);
         fragmentManager.beginTransaction()
                 .replace(R.id.recipe_step_detail_container, fragment)
                 .addToBackStack(null)
                 .commit();
-    }
-
-    private boolean isStepsEmpty(Recipe recipe) {
-        return recipe != null && !recipe.getSteps().isEmpty();
     }
 
     @Override

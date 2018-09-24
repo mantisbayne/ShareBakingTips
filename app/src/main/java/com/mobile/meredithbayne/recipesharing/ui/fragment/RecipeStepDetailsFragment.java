@@ -105,7 +105,7 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
             mThumbnail.setVisibility(View.VISIBLE);
         }
 
-        showOrHideNextStepView();
+        showOrHideNextStepView(getResources().getBoolean(R.bool.isTablet));
 
         mNextStepArrow.setOnClickListener(this);
         mNextStepHeader.setOnClickListener(this);
@@ -113,9 +113,9 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
         return root;
     }
 
-    private void showOrHideNextStepView() {
+    private void showOrHideNextStepView(boolean isTablet) {
         int size = mRecipe.getSteps().size();
-        if (mStep.getId() == size - 1) {
+        if (mStep.getId() == size - 1 || isTablet) {
             mNextStepHeader.setVisibility(View.GONE);
             mNextStepArrow.setVisibility(View.GONE);
         }
