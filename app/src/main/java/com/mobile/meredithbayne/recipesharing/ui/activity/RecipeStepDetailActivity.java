@@ -25,6 +25,7 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.recipe_step_detail_container, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

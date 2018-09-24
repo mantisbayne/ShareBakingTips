@@ -58,7 +58,7 @@ public class RecipeStepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             RecipeStepViewHolder recipeStepViewHolder = (RecipeStepViewHolder) holder;
             List<Step> steps = mRecipe.getSteps();
             Step step = steps.get(position - 1);
-            recipeStepViewHolder.mRecipeStepOrder.setText(String.valueOf(step.getId()));
+            recipeStepViewHolder.mRecipeStepOrder.setText(String.valueOf(step.getId() + 1));
             recipeStepViewHolder.mRecipeStepName.setText(step.getShortDescription());
         }
     }

@@ -10,4 +10,6 @@
     <string name="step_details_title">Step details</string>
     <string name="button_next_step_accessibility">Button next step</string>
     <string name="next_step">Next step</string>
+    <string name="recipe_thumbnail_image_accessibility">Recipe thumbnail image</string>
+    <string name="generic_recipe_image_accessibility">Generic recipe image</string>
 </resources>

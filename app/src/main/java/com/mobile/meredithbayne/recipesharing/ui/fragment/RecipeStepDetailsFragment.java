@@ -1,15 +1,19 @@
 package com.mobile.meredithbayne.recipesharing.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -25,6 +29,8 @@ import com.google.android.exoplayer2.util.Util;
 import com.mobile.meredithbayne.recipesharing.R;
 import com.mobile.meredithbayne.recipesharing.model.Recipe;
 import com.mobile.meredithbayne.recipesharing.model.Step;
+import com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepDetailActivity;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,9 +38,16 @@ import butterknife.ButterKnife;
 import static com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepActivity.EXTRA_RECIPE;
 import static com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepActivity.EXTRA_STEP;
 
-public class RecipeStepDetailsFragment extends Fragment {
+public class RecipeStepDetailsFragment extends Fragment implements View.OnClickListener {
+    private static final String STATE_POSITION = "position";
+    private static final String STATE_PLAY_WHEN_READY = "play_when_ready";
+
+
     @BindView(R.id.step_video)
     PlayerView mStepVideo;
+
+    @BindView(R.id.step_thumbnail)
+    ImageView mThumbnail;
 
     @BindView(R.id.step_description)
     TextView mStepDescription;
@@ -76,17 +89,56 @@ public class RecipeStepDetailsFragment extends Fragment {
 
         ButterKnife.bind(this, root);
 
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_POSITION)) {
+            mPlaybackPosition = savedInstanceState.getLong(STATE_POSITION);
+            mPlayWhenReady = savedInstanceState.getBoolean(STATE_PLAY_WHEN_READY);
+        }
+
         mStepDescription.setText(mStep.getDescription());
 
+        if (!mStep.getThumbnailURL().isEmpty()) {
+            Picasso.Builder builder = new Picasso.Builder(getActivity());
+            builder.build().load(mStep.getThumbnailURL())
+                    .noFade()
+                    .error(R.drawable.ic_error_outline_black)
+                    .into(mThumbnail);
+            mThumbnail.setVisibility(View.VISIBLE);
+        }
+
         showOrHideNextStepView();
+
+        mNextStepArrow.setOnClickListener(this);
+        mNextStepHeader.setOnClickListener(this);
 
         return root;
     }
 
     private void showOrHideNextStepView() {
-        if (mRecipe.getSteps().size() > 1) {
-            mNextStepHeader.setVisibility(View.VISIBLE);
-            mNextStepArrow.setVisibility(View.VISIBLE);
+        int size = mRecipe.getSteps().size();
+        if (mStep.getId() == size - 1) {
+            mNextStepHeader.setVisibility(View.GONE);
+            mNextStepArrow.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putLong(STATE_POSITION, mPlaybackPosition);
+        outState.putBoolean(STATE_PLAY_WHEN_READY, mPlayWhenReady);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            LinearLayout.LayoutParams params =
+                    (LinearLayout.LayoutParams) mStepVideo.getLayoutParams();
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            mStepVideo.setLayoutParams(params);
         }
     }
 
@@ -94,7 +146,9 @@ public class RecipeStepDetailsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (Util.SDK_INT > 23) {
-            initializePlayer();
+            if (!TextUtils.isEmpty(mStep.getVideoURL())) {
+                initializePlayer();
+            }
         }
     }
 
@@ -103,7 +157,9 @@ public class RecipeStepDetailsFragment extends Fragment {
         super.onResume();
         hideSystemUi();
         if ((Util.SDK_INT <= 23 || mPlayerView == null)) {
-            initializePlayer();
+            if (!TextUtils.isEmpty(mStep.getVideoURL())) {
+                initializePlayer();
+            }
         }
     }
 
@@ -155,11 +211,20 @@ public class RecipeStepDetailsFragment extends Fragment {
         Uri uri = Uri.parse(mStep.getVideoURL());
         MediaSource mediaSource = buildMediaSource(uri);
         mPlayerView.prepare(mediaSource, true, false);
+        mStepVideo.setVisibility(View.VISIBLE);
     }
 
     private MediaSource buildMediaSource(Uri uri) {
         return new ExtractorMediaSource.Factory(
                 new DefaultHttpDataSourceFactory(getString(R.string.app_name))).
                 createMediaSource(uri);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
+        intent.putExtra(EXTRA_RECIPE, mRecipe);
+        intent.putExtra(EXTRA_STEP, mRecipe.getSteps().get(mStep.getId() + 1));
+        startActivity(intent);
     }
 }
