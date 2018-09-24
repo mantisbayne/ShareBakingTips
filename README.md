@@ -3,7 +3,7 @@ This app shares recipes, allows users to view steps and instructional videos, an
 homescreen widget for easy interaction with the recipe list
 
 
-Libraries used:
+## Libraries
 ---------
 * [Picasso](http://square.github.io/picasso/)
 * [ExoPlayer](https://github.com/google/ExoPlayer)
