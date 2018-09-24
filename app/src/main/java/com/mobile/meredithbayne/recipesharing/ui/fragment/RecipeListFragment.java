@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ import butterknife.ButterKnife;
 
 public class RecipeListFragment extends Fragment implements RecipeListInterface {
     public static final String EXTRA_RECIPE = "recipe";
+
+    boolean isTablet;
 
     @BindView(R.id.recipe_list_container)
     RecyclerView mRecipeList;
@@ -51,7 +54,13 @@ public class RecipeListFragment extends Fragment implements RecipeListInterface 
         View root = inflater.inflate(R.layout.recipe_list_fragment, container, false);
         ButterKnife.bind(this, root);
 
-        mRecipeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        isTablet = getResources().getBoolean(R.bool.isTablet);
+
+        if (isTablet)
+            mRecipeList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        else
+            mRecipeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         mRecipeList.setHasFixedSize(true);
 
         presenter = new RecipeListPresenter(this);
