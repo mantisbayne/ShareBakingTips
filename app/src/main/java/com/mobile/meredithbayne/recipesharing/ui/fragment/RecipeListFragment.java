@@ -1,7 +1,5 @@
 package com.mobile.meredithbayne.recipesharing.ui.fragment;
 
-import android.appwidget.AppWidgetProvider;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,8 +19,6 @@ import com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepActivity;
 import com.mobile.meredithbayne.recipesharing.ui.adapters.RecipeListAdapter;
 import com.mobile.meredithbayne.recipesharing.ui.presenter.RecipeListInterface;
 import com.mobile.meredithbayne.recipesharing.ui.presenter.RecipeListPresenter;
-import com.mobile.meredithbayne.recipesharing.widget.RecipeSharingAppWidget;
-import com.mobile.meredithbayne.recipesharing.widget.RecipeSharingAppWidgetService;
 
 import java.util.List;
 
