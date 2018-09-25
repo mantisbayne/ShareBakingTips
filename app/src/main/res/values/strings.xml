@@ -13,4 +13,7 @@
     <string name="recipe_thumbnail_image_accessibility">Recipe thumbnail image</string>
     <string name="generic_recipe_image_accessibility">Generic recipe image</string>
     <string name="no_network_connection_detected">No network connection detected</string>
+    <string name="no_recipe_to_display">No recipe to display</string>
+    <string name="pref_recipe_key">recipe_name</string>
+    <string name="prefs_recipe_key">Recipe</string>
 </resources>

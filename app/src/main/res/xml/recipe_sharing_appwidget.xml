@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/recipe_sharing_appwidget"
+    android:initialLayout="@layout/recipe_sharing_appwidget_list"
     android:minHeight="@dimen/appwidget_dimen"
     android:minWidth="@dimen/appwidget_dimen"
+    android:minResizeHeight="@dimen/widget_minresize_height"
+    android:minResizeWidth="@dimen/widget_minresize_height"
     android:previewImage="@drawable/ic_cupcake"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="6000000" />
+    android:updatePeriodMillis="600" />

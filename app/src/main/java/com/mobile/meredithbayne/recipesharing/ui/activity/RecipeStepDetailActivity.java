@@ -1,5 +1,6 @@
 package com.mobile.meredithbayne.recipesharing.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +26,6 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.recipe_step_detail_container, fragment)
-                .addToBackStack(null)
                 .commit();
     }
 }

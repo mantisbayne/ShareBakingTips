@@ -13,6 +13,7 @@ import com.mobile.meredithbayne.recipesharing.model.Recipe;
 import com.mobile.meredithbayne.recipesharing.model.Step;
 import com.mobile.meredithbayne.recipesharing.ui.adapters.RecipeStepAdapter;
 import com.mobile.meredithbayne.recipesharing.ui.fragment.RecipeStepDetailsFragment;
+import com.mobile.meredithbayne.recipesharing.widget.RecipeSharingAppWidgetService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +61,7 @@ public class RecipeStepActivity extends AppCompatActivity {
                     selectedStep = mRecipe.getSteps().get(0);
                 showStepDetailsFragment(selectedStep);
             }
+            RecipeSharingAppWidgetService.updateWidget(this, mRecipe);
         }
     }
 
