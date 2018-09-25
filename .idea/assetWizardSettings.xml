@@ -30,9 +30,9 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="00acc1" />
-                            <entry key="outputName" value="ic_cupcake" />
+                            <entry key="outputName" value="ic_baseline_error_outline" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/cupcake.svg" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/baseline-error_outline-24px.svg" />
                           </map>
                         </option>
                       </PersistentState>
