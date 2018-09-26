@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         String imagePath = mRecipeList.get(position).getImage();
         Picasso.Builder builder = new Picasso.Builder(mContext);
-        if (imagePath.isEmpty()) {
+        if (TextUtils.isEmpty(imagePath)) {
             holder.mRecipeImage.setImageResource(R.drawable.ic_recipe_placeholder);
         } else {
             builder.build().load(imagePath)

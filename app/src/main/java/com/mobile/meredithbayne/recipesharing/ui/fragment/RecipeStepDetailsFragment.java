@@ -32,6 +32,8 @@ import com.mobile.meredithbayne.recipesharing.model.Step;
 import com.mobile.meredithbayne.recipesharing.ui.activity.RecipeStepDetailActivity;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -99,7 +101,7 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
 
         mStepDescription.setText(mStep.getDescription());
 
-        if (!mStep.getThumbnailURL().isEmpty()) {
+        if (!TextUtils.isEmpty(mStep.getThumbnailURL())) {
             Picasso.Builder builder = new Picasso.Builder(getActivity());
             builder.build().load(mStep.getThumbnailURL())
                     .noFade()

@@ -58,7 +58,9 @@ public class RecipeStepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             RecipeStepViewHolder recipeStepViewHolder = (RecipeStepViewHolder) holder;
             List<Step> steps = mRecipe.getSteps();
             Step step = steps.get(position - 1);
-            recipeStepViewHolder.mRecipeStepOrder.setText(String.valueOf(step.getId() + 1));
+            if (step.getId() == 0)
+                recipeStepViewHolder.mRecipeStepOrder.setVisibility(View.INVISIBLE);
+            recipeStepViewHolder.mRecipeStepOrder.setText(String.valueOf(step.getId()));
             recipeStepViewHolder.mRecipeStepName.setText(step.getShortDescription());
         }
     }
@@ -85,7 +87,7 @@ public class RecipeStepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public int getItemCount() {
         return mRecipe
                 .getSteps()
-                .size();
+                .size() + 1;
     }
 
     @Override
@@ -116,7 +118,7 @@ public class RecipeStepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         RecipeStepViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(v -> listener.onStepClick(getAdapterPosition()));
+            view.setOnClickListener(v -> listener.onStepClick(getAdapterPosition() - 1));
         }
     }
 }
