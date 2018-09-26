@@ -26,7 +26,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 public class RecipeStepTest extends BaseTest {
     @Before
     public void init() {
-        activityActivityTestRule.getActivity().getSupportFragmentManager()
+        activityTestRule.getActivity().getSupportFragmentManager()
                 .beginTransaction();
         navigateToStep(0);
     }

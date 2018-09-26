@@ -21,7 +21,7 @@ public class RecipeListTest extends BaseTest {
 
     @Before
     public void init() {
-        activityActivityTestRule.getActivity().getSupportFragmentManager()
+        activityTestRule.getActivity().getSupportFragmentManager()
                 .beginTransaction();
     }
 

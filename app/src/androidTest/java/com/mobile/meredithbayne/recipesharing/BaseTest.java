@@ -13,7 +13,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 public abstract class BaseTest {
     @Rule
-    public ActivityTestRule<RecipeListActivity> activityActivityTestRule =
+    public ActivityTestRule<RecipeListActivity> activityTestRule =
             new ActivityTestRule<>(RecipeListActivity.class);
 
     public static void navigateToDetails(int stepPosition) {
