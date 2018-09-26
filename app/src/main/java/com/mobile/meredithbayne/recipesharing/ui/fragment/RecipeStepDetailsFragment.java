@@ -59,8 +59,8 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
     ImageView mNextStepArrow;
 
     private SimpleExoPlayer mPlayerView;
-    private long mPlaybackPosition = 0;
-    private boolean mPlayWhenReady = true;
+    private long mPlaybackPosition;
+    private boolean mPlayWhenReady;
 
     private Step mStep;
     private Recipe mRecipe;
@@ -89,9 +89,12 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
 
         ButterKnife.bind(this, root);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_POSITION)) {
+        if (savedInstanceState != null) {
             mPlaybackPosition = savedInstanceState.getLong(STATE_POSITION);
             mPlayWhenReady = savedInstanceState.getBoolean(STATE_PLAY_WHEN_READY);
+        } else {
+            mPlaybackPosition = 0;
+            mPlayWhenReady = true;
         }
 
         mStepDescription.setText(mStep.getDescription());
@@ -124,7 +127,7 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
+        releasePlayer();
         outState.putLong(STATE_POSITION, mPlaybackPosition);
         outState.putBoolean(STATE_PLAY_WHEN_READY, mPlayWhenReady);
     }
@@ -139,16 +142,6 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
             params.height = ViewGroup.LayoutParams.MATCH_PARENT;
             mStepVideo.setLayoutParams(params);
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (Util.SDK_INT > 23) {
-            if (!TextUtils.isEmpty(mStep.getVideoURL())) {
-                initializePlayer();
-            }
         }
     }
 
@@ -171,18 +164,12 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (Util.SDK_INT > 23) {
-            releasePlayer();
-        }
-    }
-
     private void releasePlayer() {
         if (mPlayerView != null) {
             mPlaybackPosition = mPlayerView.getCurrentPosition();
             mPlayWhenReady = mPlayerView.getPlayWhenReady();
+
+            mPlayerView.stop();
             mPlayerView.release();
             mPlayerView = null;
         }
@@ -199,19 +186,24 @@ public class RecipeStepDetailsFragment extends Fragment implements View.OnClickL
     }
 
     private void initializePlayer() {
-        mPlayerView = ExoPlayerFactory.newSimpleInstance(
-                new DefaultRenderersFactory(getActivity()),
-                new DefaultTrackSelector(), new DefaultLoadControl());
+        if (mPlayerView == null) {
+            mPlayerView = ExoPlayerFactory.newSimpleInstance(
+                    new DefaultRenderersFactory(getActivity()),
+                    new DefaultTrackSelector(), new DefaultLoadControl());
 
-        mStepVideo.setPlayer(mPlayerView);
+            mStepVideo.setPlayer(mPlayerView);
 
-        mPlayerView.setPlayWhenReady(mPlayWhenReady);
-        mPlayerView.seekTo(mPlaybackPosition);
 
-        Uri uri = Uri.parse(mStep.getVideoURL());
-        MediaSource mediaSource = buildMediaSource(uri);
-        mPlayerView.prepare(mediaSource, true, false);
-        mStepVideo.setVisibility(View.VISIBLE);
+            if (mPlaybackPosition != 0)
+                mPlayerView.seekTo(mPlaybackPosition);
+
+            mPlayerView.setPlayWhenReady(mPlayWhenReady);
+
+            Uri uri = Uri.parse(mStep.getVideoURL());
+            MediaSource mediaSource = buildMediaSource(uri);
+            mPlayerView.prepare(mediaSource, false, false);
+            mStepVideo.setVisibility(View.VISIBLE);
+        }
     }
 
     private MediaSource buildMediaSource(Uri uri) {

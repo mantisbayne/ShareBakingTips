@@ -20,11 +20,13 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        RecipeStepDetailsFragment fragment = new RecipeStepDetailsFragment();
-        fragment.setArguments(getIntent().getExtras());
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.recipe_step_detail_container, fragment)
-                .commit();
+        if (savedInstanceState == null) {
+            RecipeStepDetailsFragment fragment = new RecipeStepDetailsFragment();
+            fragment.setArguments(getIntent().getExtras());
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.recipe_step_detail_container, fragment)
+                    .commit();
+        }
     }
 }
